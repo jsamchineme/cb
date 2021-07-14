@@ -1,0 +1,16 @@
+const path = require('path');
+
+module.exports = {
+  // I use the "dist" directory here because the config files needs to be in .js
+  // and transpiled to understand the absolute paths used in the config file
+  'config': path.resolve('dist/database', 'config.js'),
+
+  // The src directory is used here for the same reason given below
+  'seeders-path': path.resolve('src/database', 'seeders'),
+
+  // I decided to load migration from the src folder because the dist folder 
+  // contains file with extensions ".d.ts", ".js.map" but only ".js" files are allowed
+  // due to this the terminal is cluttered with some warnings saying the files don't match
+  // the expect pattern
+  'migrations-path': path.resolve('src/database', 'migrations')
+};

@@ -1,0 +1,69 @@
+{
+  "name": "conscious-baboon-demo-api",
+  "version": "0.0.1",
+  "engines": {
+    "node": "12.14.0"
+  },
+  "description": "conscious Baboon Demo API",
+  "author": "@jsamchineme",
+  "license": "MIT",
+  "scripts": {
+    "build": "tsc -p tsconfig.build.json",
+    "start": "ts-node -r tsconfig-paths/register src/server.ts",
+    "start:dev": "concurrently --handle-input \"wait-on dist/server.js && nodemon\" \"tsc -w -p tsconfig.build.json\" ",
+    "rebuild": "rimraf dist && npm run build",
+    "prestart:prod": "npm run rebuild",
+    "start:prod": "link-module-alias && node dist/server.js",
+    "lint": "tslint -p tsconfig.json -c tslint.json",
+    "db:migrate": "npm run rebuild && link-module-alias && sequelize db:migrate",
+    "db:reset": "npm run rebuild && link-module-alias && sequelize db:migrate:undo:all",
+    "heroku-postbuild": "yarn db:migrate && mkdir src/uploads",
+    "cron": "link-module-alias && node dist/cron.js"
+  },
+  "_moduleAliases": {
+    "src": "dist"
+  },
+  "dependencies": {
+    "@hapi/joi": "^17.1.0",
+    "@sendgrid/mail": "^7.4.2",
+    "@types/bcryptjs": "^2.4.2",
+    "@types/dotenv": "^6.1.1",
+    "@types/express": "^4.17.2",
+    "@types/multer": "^1.4.5",
+    "@types/node": "^13.7.4",
+    "@types/nodemailer": "^6.4.0",
+    "@types/redis": "^2.8.28",
+    "axios": "^0.21.1",
+    "bcryptjs": "^2.4.3",
+    "cheerio": "^1.0.0-rc.5",
+    "cloudinary": "^1.13.2",
+    "concurrently": "^5.1.0",
+    "cors": "^2.8.5",
+    "crypto-secure-random-digit": "^1.0.9",
+    "dotenv": "^8.0.0",
+    "express": "^4.17.1",
+    "fs": "^0.0.1-security",
+    "http": "0.0.0",
+    "jsonwebtoken": "^8.5.1",
+    "link-module-alias": "^1.2.0",
+    "multer": "^1.4.1",
+    "node-cron": "^2.0.3",
+    "nodemailer": "^6.4.17",
+    "nodemon": "^2.0.2",
+    "pg": "^7.18.2",
+    "pg-hstore": "^2.3.3",
+    "redis": "^3.0.2",
+    "rimraf": "2.6.3",
+    "rxjs": "6.5.2",
+    "sequelize": "^5.21.5",
+    "sequelize-cli": "^5.5.1",
+    "ts-node": "^8.6.2",
+    "tsconfig-paths": "^3.9.0",
+    "typescript": "^3.8.2",
+    "wait-on": "^4.0.0",
+    "winston": "^3.2.1"
+  },
+  "devDependencies": {
+    "tslint": "^6.0.0"
+  }
+}
