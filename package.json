@@ -1,6 +1,9 @@
 {
   "name": "conscious-baboon-demo-api",
   "version": "0.0.1",
+  "engines": {
+    "node": "12.14.0"
+  },
   "description": "conscious Baboon Demo API",
   "author": "@jsamchineme",
   "license": "MIT",
